@@ -1,13 +1,13 @@
 " https://github.com/tashian/dotfiles/blob/master/vimrc
+" https://github.com/skwp/dotfiles/blob/master/vimrc
 
 set nocompatible                " choose no compatibility with legacy vi
-filetype off                   " required!
+filetype off                    " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
+"" Vundle
 Bundle 'gmarik/vundle'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-ruby/vim-ruby'
@@ -18,16 +18,17 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'myusuf3/numbers.vim'
+" Bundle 'myusuf3/numbers.vim' " relative line numbers
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jpalardy/vim-slime'
+Bundle 'vim-scripts/ZoomWin'
+" Colors
+Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'uguu-org/vim-matrix-screensaver' " gotta have it
 
 filetype plugin indent on       " load file type plugins + indentation
-
-" http://slinky.imukuppi.org/zenburnpage/
-let g:zenburn_high_Contrast = 1
-colors zenburn
 
 " Slime plugin config
 let g:slime_target = "tmux"
@@ -35,6 +36,7 @@ let g:slime_target = "tmux"
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
+set mouse=a
 set number                      " Enable line numbers
 
 "" Show Invisibles
@@ -69,10 +71,6 @@ set statusline+=%P                        " percentage of file
 set scrolloff=5                         " don't scroll any closer to top/bottom
 set backspace=2                         " Set for maximum backspace smartness
 
-" Next tab
-nmap <silent> ;' :tabnext<CR>
-nmap <silent> ;l :tabprev<CR>
-
 " Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4
@@ -93,32 +91,23 @@ set smartcase                   " ... unless they contain at least one capital l
 set hidden                      " Allow unsaved buffers
 set confirm                     " Confirm all unsaved buffers on exit
 
-source ~/.vimrc.ian
-
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'altercation/vim-colors-solarized.git'
-
-" gotta have it
-Bundle 'uguu-org/vim-matrix-screensaver'
-
-syntax enable
-
-
+"" Colorschemes
 set t_Co=256
 set background=dark
 
-" solarized
-" let g:solarized_termcolors = 256
-" let g:solarized_visibility = "high"
-" let g:solarized_contrast = "high"
+" Solarized
+let g:solarized_termcolors = 256
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
 " colorscheme solarized
+
+" Zenburn
+let g:zenburn_high_Contrast = 1
+" colorscheme zenburn
 
 colorscheme tom
 
-set showcmd
-set mouse=a
-
+"" Keymappings
 map ,n :NERDTreeToggle<CR>
 map ,t :CtrlP<CR>
 
