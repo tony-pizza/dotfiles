@@ -22,10 +22,14 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jpalardy/vim-slime'
+Bundle 'slim-template/vim-slim'
 Bundle 'vim-scripts/ZoomWin'
 " Colors
+Bundle 'jnurmine/Zenburn'
 Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'peeinears/vim-tomorrow-night-dark'
+Bundle 'altercation/vim-colors-solarized'
+
 Bundle 'uguu-org/vim-matrix-screensaver' " gotta have it
 
 filetype plugin indent on       " load file type plugins + indentation
@@ -105,7 +109,7 @@ let g:solarized_contrast = "high"
 let g:zenburn_high_Contrast = 1
 " colorscheme zenburn
 
-colorscheme tom
+colorscheme Tomorrow-Night-Dark
 
 "" Keymappings
 map ,n :NERDTreeToggle<CR>
