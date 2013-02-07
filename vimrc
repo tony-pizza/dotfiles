@@ -29,8 +29,8 @@ Bundle 'jnurmine/Zenburn'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'peeinears/vim-tomorrow-night-dark'
 Bundle 'altercation/vim-colors-solarized'
-
-Bundle 'uguu-org/vim-matrix-screensaver' " gotta have it
+" gotta have it
+Bundle 'uguu-org/vim-matrix-screensaver'
 
 filetype plugin indent on       " load file type plugins + indentation
 
