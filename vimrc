@@ -132,6 +132,8 @@ nmap <Tab><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nmap <Tab><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
 map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 imap jj <Esc>
