@@ -23,7 +23,11 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jpalardy/vim-slime'
 Bundle 'slim-template/vim-slim'
-Bundle 'vim-scripts/ZoomWin'
+" Bundle 'vim-scripts/ZoomWin'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'rson/vim-conque'
+Bundle 'yerdle/vim-ruby-conque'
+Bundle 'terryma/vim-multiple-cursors'
 " Colors
 Bundle 'jnurmine/Zenburn'
 Bundle 'chriskempson/vim-tomorrow-theme'
@@ -33,6 +37,9 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'uguu-org/vim-matrix-screensaver'
 
 filetype plugin indent on       " load file type plugins + indentation
+
+" Set <leader> key to ,
+let mapleader = ","
 
 " Slime plugin config
 let g:slime_target = "tmux"
@@ -115,9 +122,9 @@ colorscheme Tomorrow-Night-Dark
 map ,n :NERDTreeToggle<CR>
 map ,t :CtrlP<CR>
 
-map <Leader><Leader> :ZoomWin<CR>
-map zz :ZoomWin<CR>
-map ,z :ZoomWin<CR>
+" map <Leader><Leader> :ZoomWin<CR>
+" map zz :ZoomWin<CR>
+" map ,z :ZoomWin<CR>
 
 nmap <tab><tab> :tabnext<CR>
 nmap <C-t> :tabnew<CR>
@@ -136,6 +143,8 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+imap <C-l> <Space>=><Space>
+
 imap jj <Esc>
 
 map vv :vsplit<CR>
@@ -149,3 +158,14 @@ endif
 au BufRead,BufNewFile *.hamlc set ft=haml
 
 let g:ctrlp_by_filename = 0
+
+" Conque stuff
+" Pass --drb option to ruby conque
+let g:ruby_conque_rspec_runner = "zeus test"
+" " Cmd-Shift-R for RSpec
+nmap <silent> <leader>r :call RunRspecCurrentFileConque()<CR>
+" " Cmd-Shift-L for RSpec Current Line
+nmap <silent> <leader>l :call RunRspecCurrentLineConque()<CR>
+" " ,Cmd-R for Last conque command
+nmap <silent> <leader><D-R> :call RunLastConqueCommand()<CR>
+
