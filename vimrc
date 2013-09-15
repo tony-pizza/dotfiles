@@ -8,26 +8,33 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 "" Vundle
+
+" Utils
 Bundle 'gmarik/vundle'
 Bundle 'mileszs/ack.vim'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'myusuf3/numbers.vim' " relative line numbers
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'jpalardy/vim-slime'
-Bundle 'slim-template/vim-slim'
-" Bundle 'vim-scripts/ZoomWin'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'rson/vim-conque'
+" Bundle 'airblade/vim-gitgutter'
+Bundle 'basepi/vim-conque'
 Bundle 'yerdle/vim-ruby-conque'
-Bundle 'terryma/vim-multiple-cursors'
+" Bundle 'myusuf3/numbers.vim'
+" Bundle 'jpalardy/vim-slime'
+" Bundle 'vim-scripts/ZoomWin'
+" Bundle 'Lokaltog/vim-powerline'
+" Bundle 'terryma/vim-multiple-cursors'
+" Bundle 'FredKSchott/CoVim'
+
+" Langs
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-haml'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'groenewege/vim-less'
+Bundle 'slim-template/vim-slim'
+
 " Colors
 Bundle 'jnurmine/Zenburn'
 Bundle 'chriskempson/vim-tomorrow-theme'
@@ -168,4 +175,3 @@ nmap <silent> <leader>r :call RunRspecCurrentFileConque()<CR>
 nmap <silent> <leader>l :call RunRspecCurrentLineConque()<CR>
 " " ,Cmd-R for Last conque command
 nmap <silent> <leader><D-R> :call RunLastConqueCommand()<CR>
-
