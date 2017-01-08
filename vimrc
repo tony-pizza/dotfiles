@@ -1,47 +1,57 @@
-" https://github.com/tashian/dotfiles/blob/master/vimrc
-" https://github.com/skwp/dotfiles/blob/master/vimrc
+call plug#begin('~/.vim/plugged')
+
+" Utils
+Plug 'gmarik/vundle'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
+Plug 'skalnik/vim-vroom'
+Plug 'toyamarinyon/vim-swift'
+" Plug 'mamut/vim-css-hex'
+" Plug 'skammer/vim-css-color'
+" Plug 'bling/vim-airline'
+" Plug 'basepi/vim-conque'
+" Plug 'yerdle/vim-ruby-conque'
+" Plug 'myusuf3/numbers.vim'
+" Plug 'jpalardy/vim-slime'
+" Plug 'vim-scripts/ZoomWin'
+" Plug 'Lokaltog/vim-powerline'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'FredKSchott/CoVim'
+" Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-github-dashboard'
+
+" Langs
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-haml'
+Plug 'kchmck/vim-coffee-script'
+Plug 'groenewege/vim-less'
+Plug 'slim-template/vim-slim'
+" Plug 'mxw/vim-jsx'
+" Plug 'isRuslan/vim-es6'
+" Plug 'othree/yajs.vim'
+
+" Colors
+Plug 'jnurmine/Zenburn'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'peeinears/vim-tomorrow-night-dark'
+Plug 'altercation/vim-colors-solarized'
+Plug 'uguu-org/vim-matrix-screensaver' " gotta have it
+
+call plug#end()
+
 
 set nocompatible                " choose no compatibility with legacy vi
 filetype off                    " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-"" Vundle
-
-" Utils
-Bundle 'gmarik/vundle'
-Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-" Bundle 'airblade/vim-gitgutter'
-Bundle 'basepi/vim-conque'
-Bundle 'yerdle/vim-ruby-conque'
-" Bundle 'myusuf3/numbers.vim'
-" Bundle 'jpalardy/vim-slime'
-" Bundle 'vim-scripts/ZoomWin'
-" Bundle 'Lokaltog/vim-powerline'
-" Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'FredKSchott/CoVim'
-
-" Langs
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-haml'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'groenewege/vim-less'
-Bundle 'slim-template/vim-slim'
-
-" Colors
-Bundle 'jnurmine/Zenburn'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'peeinears/vim-tomorrow-night-dark'
-Bundle 'altercation/vim-colors-solarized'
-" gotta have it
-Bundle 'uguu-org/vim-matrix-screensaver'
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -80,12 +90,12 @@ set visualbell t_vb=                    " Silence bells
 set nostartofline                       " When paging, don't go to the start of the line
 set laststatus=2                        " show status line all the time
 set statusline=
-set statusline+=%<\                       " cut at start
-set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
-set statusline+=%-40f\                    " path
-set statusline+=%=%1*%y%*%*\              " file type
-set statusline+=%10((%l,%c)%)\            " line and column
-set statusline+=%P                        " percentage of file
+set statusline+=%<\                     " cut at start
+set statusline+=%2*[%n%H%M%R%W]%*\      " flags and buf no
+set statusline+=%-40f\                  " path
+set statusline+=%=%1*%y%*%*\            " file type
+set statusline+=%10((%l,%c)%)\          " line and column
+set statusline+=%P                      " percentage of file
 set scrolloff=5                         " don't scroll any closer to top/bottom
 set backspace=2                         " Set for maximum backspace smartness
 
@@ -165,13 +175,22 @@ endif
 au BufRead,BufNewFile *.hamlc set ft=haml
 
 let g:ctrlp_by_filename = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
 
-" Conque stuff
-" Pass --drb option to ruby conque
-let g:ruby_conque_rspec_runner = "zeus test"
-" " Cmd-Shift-R for RSpec
-nmap <silent> <leader>r :call RunRspecCurrentFileConque()<CR>
-" " Cmd-Shift-L for RSpec Current Line
-nmap <silent> <leader>l :call RunRspecCurrentLineConque()<CR>
-" " ,Cmd-R for Last conque command
-nmap <silent> <leader><D-R> :call RunLastConqueCommand()<CR>
+let g:vroom_use_vimux=1
+let g:vroom_use_spring=1
+map <leader>r :VroomRunTestFile<CR>
+map <leader>l :VroomRunNearestTest<CR>
+
+
+"" allow jsx highlighting in .js files
+let g:jsx_ext_required = 0
+
+
+"" tab bar color
+hi TabLineFill ctermfg=234 ctermbg=234
+hi TabLine ctermfg=235  ctermbg=250
+hi TabLineSel ctermfg=255 ctermbg=238
