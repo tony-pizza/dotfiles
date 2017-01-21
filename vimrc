@@ -6,12 +6,15 @@ Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'skalnik/vim-vroom'
 Plug 'toyamarinyon/vim-swift'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Plug 'vim-syntastic/syntastic'
 " Plug 'mamut/vim-css-hex'
 " Plug 'skammer/vim-css-color'
 " Plug 'bling/vim-airline'
@@ -25,9 +28,11 @@ Plug 'toyamarinyon/vim-swift'
 " Plug 'FredKSchott/CoVim'
 " Plug 'junegunn/vim-easy-align'
 " Plug 'junegunn/vim-github-dashboard'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 " Langs
-Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-haml'
 Plug 'kchmck/vim-coffee-script'
@@ -137,7 +142,8 @@ colorscheme Tomorrow-Night-Dark
 
 "" Keymappings
 map ,n :NERDTreeToggle<CR>
-map ,t :CtrlP<CR>
+" map ,t :CtrlP<CR>
+map ,t :FZF<CR>
 
 " map <Leader><Leader> :ZoomWin<CR>
 " map zz :ZoomWin<CR>
@@ -174,14 +180,18 @@ endif
 
 au BufRead,BufNewFile *.hamlc set ft=haml
 
-let g:ctrlp_by_filename = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-  \ 'file': '\.exe$\|\.so$\|\.dat$'
-  \ }
+" let g:ctrlp_max_files = 0
+" let g:ctrlp_by_filename = 0
+" let g:ctrlp_max_depth = 40
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+"   \ 'file': '\.exe$\|\.so$\|\.dat$'
+"   \ }
 
 let g:vroom_use_vimux=1
 let g:vroom_use_spring=1
+let g:vroom_use_bundle_exec=1
+let g:vroom_clear_screen=0
 map <leader>r :VroomRunTestFile<CR>
 map <leader>l :VroomRunNearestTest<CR>
 
@@ -194,3 +204,14 @@ let g:jsx_ext_required = 0
 hi TabLineFill ctermfg=234 ctermbg=234
 hi TabLine ctermfg=235  ctermbg=250
 hi TabLineSel ctermfg=255 ctermbg=238
+
+
+"" syntastic recommended settings
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
