@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Utils
-Plug 'gmarik/vundle'
+" Plug 'gmarik/vundle'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
@@ -31,6 +31,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+endif
+
 " Langs
 " Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -41,12 +46,19 @@ Plug 'slim-template/vim-slim'
 " Plug 'mxw/vim-jsx'
 " Plug 'isRuslan/vim-es6'
 " Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'sheerun/vim-polyglot'
 
 " Colors
 Plug 'jnurmine/Zenburn'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'peeinears/vim-tomorrow-night-dark'
 Plug 'altercation/vim-colors-solarized'
+Plug 'MaxSt/FlatColor'
+Plug 'mhartington/oceanic-next'
+Plug 'joshdick/onedark.vim'
+
 Plug 'uguu-org/vim-matrix-screensaver' " gotta have it
 
 call plug#end()
@@ -55,8 +67,8 @@ call plug#end()
 set nocompatible                " choose no compatibility with legacy vi
 filetype off                    " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#rc()
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -124,21 +136,45 @@ set smartcase                   " ... unless they contain at least one capital l
 set hidden                      " Allow unsaved buffers
 set confirm                     " Confirm all unsaved buffers on exit
 
+"" tab bar color
+hi TabLineFill ctermfg=234 ctermbg=234
+hi TabLine ctermfg=235  ctermbg=250
+hi TabLineSel ctermfg=255 ctermbg=238
+
 "" Colorschemes
-set t_Co=256
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+" if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+" endif
+
+" set t_Co=256
 set background=dark
 
 " Solarized
-let g:solarized_termcolors = 256
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
+" let g:solarized_termcolors = 256
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
 " colorscheme solarized
 
 " Zenburn
-let g:zenburn_high_Contrast = 1
+" let g:zenburn_high_Contrast = 1
 " colorscheme zenburn
 
-colorscheme Tomorrow-Night-Dark
+" colorscheme Tomorrow-Night-Dark
+let g:onedark_color_overrides = { "black": {"gui": "#181A1F", "cterm": "235", "cterm16": "0" } }
+colorscheme onedark
 
 "" Keymappings
 map ,n :NERDTreeToggle<CR>
@@ -197,14 +233,7 @@ map <leader>l :VroomRunNearestTest<CR>
 
 
 "" allow jsx highlighting in .js files
-let g:jsx_ext_required = 0
-
-
-"" tab bar color
-hi TabLineFill ctermfg=234 ctermbg=234
-hi TabLine ctermfg=235  ctermbg=250
-hi TabLineSel ctermfg=255 ctermbg=238
-
+" let g:jsx_ext_required = 0
 
 "" syntastic recommended settings
 " set statusline+=%#warningmsg#
@@ -215,3 +244,10 @@ hi TabLineSel ctermfg=255 ctermbg=238
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
+
+"" ctags
+" open ctag in vertical pane
+" nnoremap <C-]> :execute "vertical ptag " . expand("<cword>")<CR>
+" open ctag in new tab
+nnoremap <silent><Leader><C-]> :execute "tag " . expand("<cword>")<CR>
+" nnoremap <C-]> :tabnew<CR>:execute("tag " . expand("<cword>"))<CR>
