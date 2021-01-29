@@ -87,6 +87,7 @@
 [merge]
   summary = true
   verbosity = 1
+	tool = diffconflicts
 [apply]
   whitespace = nowarn
 [branch]
@@ -121,3 +122,13 @@
 	trustExitCode = true
 [credential]
 	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[mergetool "diffconflicts"]
+	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
+[mergetool]
+	keepBackup = false

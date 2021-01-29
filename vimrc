@@ -1,19 +1,22 @@
 call plug#begin('~/.vim/plugged')
 
 " Utils
-" Plug 'gmarik/vundle'
 Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-" Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'skalnik/vim-vroom'
 Plug 'toyamarinyon/vim-swift'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'whiteinge/diffconflicts'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'pechorin/any-jump.vim'
+Plug 'brooth/far.vim'
+Plug 'tpope/vim-endwise'
+Plug 'codota/tabnine-vim'
 " Plug 'vim-syntastic/syntastic'
 " Plug 'mamut/vim-css-hex'
 " Plug 'skammer/vim-css-color'
@@ -28,36 +31,46 @@ Plug 'junegunn/fzf.vim'
 " Plug 'FredKSchott/CoVim'
 " Plug 'junegunn/vim-easy-align'
 " Plug 'junegunn/vim-github-dashboard'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+" Plug 'kien/ctrlp.vim'
+" Plug 'tpope/vim-surround'
+" Plug 'gmarik/vundle'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-endif
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"   let g:deoplete#enable_at_startup = 1
+" endif
 
 " Langs
-" Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-haml'
-Plug 'kchmck/vim-coffee-script'
-Plug 'groenewege/vim-less'
+Plug 'sheerun/vim-polyglot'
 Plug 'slim-template/vim-slim'
+Plug 'pangloss/vim-javascript'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-haml'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'groenewege/vim-less'
 " Plug 'mxw/vim-jsx'
 " Plug 'isRuslan/vim-es6'
 " Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'sheerun/vim-polyglot'
+" Plug 'mxw/vim-jsx'
 
 " Colors
-Plug 'jnurmine/Zenburn'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'peeinears/vim-tomorrow-night-dark'
-Plug 'altercation/vim-colors-solarized'
-Plug 'MaxSt/FlatColor'
-Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
+" Plug 'jnurmine/Zenburn'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'peeinears/vim-tomorrow-night-dark'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'MaxSt/FlatColor'
+" Plug 'mhartington/oceanic-next'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'philips/meink.vim'
+Plug 'philips/eink.vim'
+" Plug 'llinfeng/4000131dbfd6d37831aa3b3b135e91ae'
+Plug 'chriskempson/base16-vim'
+Plug 'reedes/vim-colors-pencil'
+Plug 'pgdouyon/vim-yin-yang'
 
 Plug 'uguu-org/vim-matrix-screensaver' " gotta have it
 
@@ -87,7 +100,6 @@ set number                      " Enable line numbers
 "" Show Invisibles
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-nmap <leader>f :Ack 
 nmap <leader>n :NERDTreeToggle<CR>
 
 " Powerline font
@@ -174,12 +186,20 @@ set background=dark
 
 " colorscheme Tomorrow-Night-Dark
 let g:onedark_color_overrides = { "black": {"gui": "#181A1F", "cterm": "235", "cterm16": "0" } }
-colorscheme onedark
+let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+if s:mode ==? "dark"
+  colorscheme onedark
+else
+  " colorscheme base16-grayscale-light
+  colorscheme base16-google-light
+endif
 
 "" Keymappings
-map ,n :NERDTreeToggle<CR>
+map <silent><Leader>n :NERDTreeToggle<CR>
 " map ,t :CtrlP<CR>
-map ,t :FZF<CR>
+map <silent><Leader>t :FZF<CR>
+
+map <silent><Leader>f :execute "Rg " . expand("<cword>")<CR>
 
 " map <Leader><Leader> :ZoomWin<CR>
 " map zz :ZoomWin<CR>
@@ -251,3 +271,8 @@ map <leader>l :VroomRunNearestTest<CR>
 " open ctag in new tab
 nnoremap <silent><Leader><C-]> :execute "tag " . expand("<cword>")<CR>
 " nnoremap <C-]> :tabnew<CR>:execute("tag " . expand("<cword>"))<CR>
+
+
+" fzf ignore files in gitignore
+" let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+" let $FZF_DEFAULT_COMMAND = 'rg -g ""'
