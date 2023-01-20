@@ -97,6 +97,7 @@
   # the usual default is to push all branches
   # was default = tracking
   default = upstream
+	autoSetupRemote = true
 [core]
   autocrlf = false
 	editor = nvim

@@ -17,6 +17,7 @@ Plug 'pechorin/any-jump.vim'
 Plug 'brooth/far.vim'
 Plug 'tpope/vim-endwise'
 Plug 'codota/tabnine-vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Plug 'vim-syntastic/syntastic'
 " Plug 'mamut/vim-css-hex'
 " Plug 'skammer/vim-css-color'
@@ -187,17 +188,17 @@ set background=dark
 " colorscheme Tomorrow-Night-Dark
 let g:onedark_color_overrides = { "black": {"gui": "#181A1F", "cterm": "235", "cterm16": "0" } }
 let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
-if s:mode ==? "dark"
+" if s:mode ==? "dark"
   colorscheme onedark
-else
-  " colorscheme base16-grayscale-light
-  colorscheme base16-google-light
-endif
+" else
+"   " colorscheme base16-grayscale-light
+"   colorscheme base16-google-light
+" endif
 
 "" Keymappings
 map <silent><Leader>n :NERDTreeToggle<CR>
 " map ,t :CtrlP<CR>
-map <silent><Leader>t :FZF<CR>
+map <silent><Leader>t :GFiles<CR>
 
 map <silent><Leader>f :execute "Rg " . expand("<cword>")<CR>
 
